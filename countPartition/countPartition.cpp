@@ -39,7 +39,7 @@ int main() {
     std::vector<std :: vector <int>> dp(n + 1, std :: vector <int>(n + 1, -1));
     int ans = count_Partition(n, dp);
     int ans_1 = cnt_Partition(n);
-    
+
     std::cout << "Partition for " << n << " : \n"
     << ans << std :: endl
     << ans_1 << std :: endl;
