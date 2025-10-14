@@ -33,6 +33,8 @@ int count_Partitions(int &num){
             dp[i][j] = count;
         }
     }
+
+    
     return dp[1][num];
 }
 
@@ -56,7 +58,7 @@ int cnt_partitions(std :: vector < std :: vector <int>> &dp, int num, int k = 1)
 int cnt_Partition(int &num){
     std :: vector <std :: vector <int>> dp(num + 1, std :: vector <int>(num + 1, 0));
 
-    for(int i = 0; i <= num; i++){
+    for(int i = 1; i <= num; i++){
         dp[i][0] = 1;
     }
 
@@ -66,11 +68,12 @@ int cnt_Partition(int &num){
             dp[i][j] += (i < num) ? dp[i + 1][j] : 0;
         }
     }
+
     return dp[1][num];
 }
 
 int main() {
-    int n = 14;
+    int n = 50;
     std::vector<std :: vector <int>> dp(n + 1, std :: vector <int>(n + 1, -1));
     int ans = count_Partition(n, dp);
     int ans_1 = cnt_Partition(n);
@@ -83,6 +86,7 @@ int main() {
     << ans << std :: endl
     << ans_1 << std :: endl
     << ans_2 << std :: endl
-    << ans_3 << std :: endl;
+    << ans_3 << std :: endl
+    ;
     return 0;
 }
