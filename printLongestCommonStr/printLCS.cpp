@@ -18,7 +18,6 @@ std :: string lcs(std :: vector <std :: vector <std :: string>> &dp, std :: stri
     else{
         std :: string curr_s1 = lcs(dp, s1, s2, i, j + 1);
         std :: string curr_s2 = lcs(dp, s1, s2, i + 1, j);
-        
         s_ = (curr_s1.size() > curr_s2.size()) ? curr_s1 : curr_s2;
     }
     return dp[i][j] = (s.size() > s_.size()) ? s : s_;
