@@ -62,8 +62,8 @@ int longestCommonSubstring(std :: string &s1, std :: string &s2){
 }
 
 int main(){
-    std :: string s1 = "101110001101101";
-    std :: string s2 = "10011011";
+    std :: string s1 = "10110";
+    std :: string s2 = "101";
     int n1 = s1.size();
     int n2 = s2.size();
     int m = std :: min(n1, n2);
