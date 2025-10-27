@@ -22,7 +22,6 @@ int longestCommonSubString(std :: string &s1, std :: string &s2){
     return maxLen;
 }
 
-//try to memoize it...
 int longestCommonSubStr( std :: vector <std :: vector <std :: vector <int>>> &dp, std :: string &s1, std :: string &s2, int maxLen = 0, int i = 0, int j = 0){
     if(i == s1.size() || j == s2.size()){
         return maxLen;
@@ -32,7 +31,7 @@ int longestCommonSubStr( std :: vector <std :: vector <std :: vector <int>>> &dp
         //std :: cout << "recomputation!!" << std :: endl;
         return dp[i][j][maxLen];
     }
-    int sLen = 0;
+    int sLen = maxLen;
     if(s1[i] == s2[j]){
         sLen = longestCommonSubStr(dp, s1, s2, maxLen + 1, i + 1, j + 1);
     }
@@ -62,8 +61,8 @@ int longestCommonSubstring(std :: string &s1, std :: string &s2){
 }
 
 int main(){
-    std :: string s1 = "10110";
-    std :: string s2 = "101";
+    std :: string s1 = "thequickbrownfoxjumpsoverthelazydog";
+    std :: string s2 = "foxisacunninganimal";
     int n1 = s1.size();
     int n2 = s2.size();
     int m = std :: min(n1, n2);
