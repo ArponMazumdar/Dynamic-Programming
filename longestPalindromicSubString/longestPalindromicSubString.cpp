@@ -29,26 +29,24 @@ int longPal(std :: vector <std :: vector <int>> &dp, std :: string &s, int i, in
     return dp[i][j] = std :: max(std :: max(moveI, moveJ), len);
 }
 
-//bugs here... 
 int longestPalindromic(std :: string &s){
     int len = s.size();
     std :: vector <std :: vector <int>> dp(len + 1, std :: vector <int>(len, 0));
 
-    for(int i = 0; i < len; i++){
-        dp[i][i] = 1;
-    }
-
+    int start = 0;
     for(int i = len - 1; i >= 0; i--){
+        dp[i][i] = 1;
         int longLen = 0;
-        for(int j = 0; j < len; j--){
+        for(int j = i + 1; j < len; j++){
             if(s[i] == s[j]){
                 longLen = dp[i + 1][j - 1];
-                if(longLen = j - i - 1){
+                if(longLen == j - i - 1){
                     dp[i][j] = longLen + 2;
+                    continue;
                 }
             }
             int moveI = dp[i + 1][j];
-            int moveJ = dp[i][j + 1];
+            int moveJ = dp[i][j - 1];
 
             dp[i][j] = std :: max(longLen, std :: max(moveI, moveJ));
         }
@@ -56,15 +54,70 @@ int longestPalindromic(std :: string &s){
     return dp[0][len - 1];
 }
 
+std :: string longestPalSubString(std :: string &s){
+    int len = s.size();
+    std :: vector <std :: vector <std :: string>> dp(len, std :: vector <std :: string>(len, ""));
+
+    for(int i = len - 1; i >= 0; i--){
+        dp[i][i] = s[i];
+        for(int j = i + 1; j < len; j++){
+            if(s[i] == s[j]){
+                std :: string str = dp[i + 1][j - 1];
+
+                if(str.size() == j - i - 1){
+                    dp[i][j] = s[i] + str + s[j];
+                    continue;
+                }
+            }
+
+            std :: string s1 = dp[i + 1][j];
+            std :: string s2 = dp[i][j - 1];
+            dp[i][j] = (s1.size() >= s2.size()) ? s1 : s2;
+        }
+    }
+    return dp[0][len - 1];
+}
+
+std :: string longest_Palindromic(std :: string &s){
+    int len = s.size();
+    std :: vector <std :: string> dp(len, "");
+    std :: vector <std :: string> row(len, "");
+    std :: vector <std :: string> col(len, "");
+
+    for(int i = len - 1; i >= 0; i--){
+        dp[i] = s[i];
+        for(int j = i + 1; j < len; j++){
+            if(s[i] == s[j]){
+                std :: string str = row[j - 1];
+
+                if(str.size() == j - i - 1){
+                    dp[j] = s[i] + str + s[j];
+                    continue; 
+                }
+            }
+            std :: string s1 = dp[j - 1];
+            std :: string s2 = row[j];
+            dp[j] = (s1.size() >= s2.size()) ? s1 : s2;
+        }
+        row = dp;
+    }
+    return dp[len - 1];
+}
+
 int main(){
-    std :: string s = "popboob";
+    std :: string s = "madamishappy";
     int n = s.size();
     std :: vector <std :: vector <int>> dp(n, std :: vector <int>(n, -1));
     int len = longPal(dp, s, 0, n - 1);
     int len_1 = longestPalindromic(s);
-    std :: cout << "longest palindromic substring length: "
+    std :: string str_1 = longestPalSubString(s);
+    std :: string str_2 = longest_Palindromic(s);
+    std :: cout << "longest palindromic substring length: \n"
     << len << std :: endl
     << len_1 << std :: endl
+    <<"longest palindromic substring: " << std :: endl
+    << str_1 << std :: endl
+    << str_2 << std :: endl
     ;
     return 0;
 }

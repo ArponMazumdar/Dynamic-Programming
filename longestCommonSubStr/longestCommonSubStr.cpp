@@ -28,7 +28,6 @@ int longestCommonSubStr( std :: vector <std :: vector <std :: vector <int>>> &dp
     }
 
     if(dp[i][j][maxLen] != -1){
-        //std :: cout << "recomputation!!" << std :: endl;
         return dp[i][j][maxLen];
     }
     int sLen = maxLen;

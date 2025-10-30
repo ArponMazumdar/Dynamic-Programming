@@ -51,7 +51,7 @@ int main(){
     std :: vector <std :: vector <std :: string>> dp(s1.size(), std :: vector <std :: string>(s2.size(), ""));
     std :: string LCS = lcs(dp, s1, s2);
     std :: string LCS1 = lcs_(s1, s2);
-    std :: cout <<"longest common substring : \n"
+    std :: cout <<"longest common subsequence : \n"
     << LCS << std :: endl
     << LCS1 << std :: endl
     ;
