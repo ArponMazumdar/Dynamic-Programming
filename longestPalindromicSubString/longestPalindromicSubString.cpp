@@ -63,7 +63,6 @@ std :: string longestPalSubString(std :: string &s){
         for(int j = i + 1; j < len; j++){
             if(s[i] == s[j]){
                 std :: string str = dp[i + 1][j - 1];
-
                 if(str.size() == j - i - 1){
                     dp[i][j] = s[i] + str + s[j];
                     continue;
@@ -82,14 +81,12 @@ std :: string longest_Palindromic(std :: string &s){
     int len = s.size();
     std :: vector <std :: string> dp(len, "");
     std :: vector <std :: string> row(len, "");
-    std :: vector <std :: string> col(len, "");
 
     for(int i = len - 1; i >= 0; i--){
         dp[i] = s[i];
         for(int j = i + 1; j < len; j++){
             if(s[i] == s[j]){
                 std :: string str = row[j - 1];
-
                 if(str.size() == j - i - 1){
                     dp[j] = s[i] + str + s[j];
                     continue; 
@@ -105,7 +102,7 @@ std :: string longest_Palindromic(std :: string &s){
 }
 
 int main(){
-    std :: string s = "madamishappy";
+    std :: string s = "baabbadabbabaab";
     int n = s.size();
     std :: vector <std :: vector <int>> dp(n, std :: vector <int>(n, -1));
     int len = longPal(dp, s, 0, n - 1);
