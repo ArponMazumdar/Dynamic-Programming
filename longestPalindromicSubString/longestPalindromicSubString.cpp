@@ -101,6 +101,38 @@ std :: string longest_Palindromic(std :: string &s){
     return dp[len - 1];
 }
 
+std :: string longestPalindromicSubString_ExpandArrond(std :: string &s){
+    //most efficient. Accepted in leetcode. 
+    int len = s.size();
+    int maxLen = 1;
+    int index = 0;
+    for(int i = 0; i < len; i++){
+        int high = i + 1;
+        int low = i;
+        while(low >= 0 && high < len && s[low] == s[high]){
+            int currMaxLen = high - low + 1;
+            if(currMaxLen >= maxLen){
+                maxLen = currMaxLen;
+                index = low;
+            }
+            low--;
+            high++;
+        }
+        high = i + 1;
+        low = i - 1;
+        while(low >= 0 && high < len && s[low] == s[high]){
+            int currMaxLen = high - low + 1;
+            if(currMaxLen >= maxLen){
+                maxLen = currMaxLen;
+                index = low;
+            }
+            low--;
+            high++;
+        }
+    }
+    return (maxLen != -1 && index != -1) ? s.substr(index, maxLen) : "";
+}
+
 int main(){
     std :: string s = "baabbadabbabaab";
     int n = s.size();
@@ -109,12 +141,14 @@ int main(){
     int len_1 = longestPalindromic(s);
     std :: string str_1 = longestPalSubString(s);
     std :: string str_2 = longest_Palindromic(s);
+    std :: string str_3 = longestPalindromicSubString_ExpandArrond(s);
     std :: cout << "longest palindromic substring length: \n"
     << len << std :: endl
     << len_1 << std :: endl
     <<"longest palindromic substring: " << std :: endl
     << str_1 << std :: endl
     << str_2 << std :: endl
+    << str_3 << std :: endl
     ;
     return 0;
 }
