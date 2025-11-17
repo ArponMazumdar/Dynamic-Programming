@@ -19,7 +19,7 @@ int longestPalindromicSubSquence(std :: string &s){
     return dp[0][len - 1];
 }
 
-int longestPalindromicsubString_spaceOptimized(std :: string &s){
+int longestPalindromicsubSequence_spaceOptimized(std :: string &s){
     int len = s.size();
     std :: vector <int> curr(len, 0);
     std :: vector <int> dp(len, 0);
@@ -38,13 +38,41 @@ int longestPalindromicsubString_spaceOptimized(std :: string &s){
     return dp[len - 1];
 }
 
+int longestPalindromicSubSeq(std :: string &s, std :: vector <std :: vector <int>> dp, int i, int j){
+    if(j < i || i >= s.size() || j < 0){
+        return 0;
+    }
+
+    if(i == j){
+        return 1;
+    }
+
+    if(dp[i][j] != -1){
+        return dp[i][j];
+    }
+
+    int len = -1;
+    if(s[i] == s[j]){
+        len = 2 + longestPalindromicSubSeq(s, dp, i + 1, j - 1);
+    }
+
+    int mv_i = longestPalindromicSubSeq(s, dp, i + 1, j);
+    int mv_j = longestPalindromicSubSeq(s, dp, i, j - 1);
+
+    dp[i][j] = std :: max(len, std :: max(mv_i, mv_j));
+    return dp[i][j];
+}
+
 int main(){
     std :: string s = "abaacbaba";
+    int str_len = s.size();
+    std :: vector <std :: vector <int>> dp(str_len, std :: vector <int> (str_len, -1));
     int ans = longestPalindromicSubSquence(s);
-    int ans_1 = longestPalindromicsubString_spaceOptimized(s);
+    int ans_1 = longestPalindromicsubSequence_spaceOptimized(s);
+    int ans_2 = longestPalindromicSubSeq(s, dp, 0, str_len - 1);
     std :: cout << "longest Palindromic Subsequence length :\n"
     << ans << std :: endl
-    << ans_1 << std :: endl;
-
+    << ans_1 << std :: endl
+    << ans_2 << std :: endl;
     return 0;
 }

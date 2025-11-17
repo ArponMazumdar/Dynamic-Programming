@@ -24,7 +24,7 @@ std :: vector < std :: string > GenerateParenthesis(int &n, int i = 0, int j = 0
 }
 
 int main(){
-    int n = 20;
+    int n = 2;
     std :: vector < std :: string > ans = GenerateParenthesis(n);
     for(std :: string parenthesisCombination : ans){
         std :: cout << parenthesisCombination << std :: endl;
