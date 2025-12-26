@@ -14,6 +14,8 @@ public:
         n = str2.size();
         s1 = str1;
         s2 = str2;
+    }
+    void resetDP(){
         dp.assign(m, std :: vector <int>(n, -1));
     }
     int solveDistinctSubSequence(int i = 0, int j = 0){
@@ -44,16 +46,33 @@ public:
         }
         return dp[0][0];
     }
+    int countDistinctSubSeq(int p = 0, int j = 0){
+        if(p >= m && j != n) return 0;
+        if(j == n) return 1;
+        if(dp[p][j] != -1) return dp[p][j];
+
+        int count = 0;
+        for(int i = p; i < m; i++){
+            if(s1[i] == s2[j]){
+                count += countDistinctSubSeq(i + 1, j + 1);
+            }
+        }
+        return dp[p][j] = count;
+    }
 };
 
 int main(){
-    std :: string s1 = "bbagaabgagbgag";
+    std :: string s1 = "bbagbgagbabbbagaabaagbga";
     std :: string s2 = "bag";
     solution problem(s1, s2);
+    problem.resetDP();
     int cnt0 = problem.solveDistinctSubSequence();
     int cnt1 = problem.countDistinctSubSequence();
+    problem.resetDP();
+    int cnt2 = problem.countDistinctSubSeq();
     std :: cout <<"distinct sub sequences: \n"
     << cnt0 << std :: endl
-    << cnt1 << std :: endl; 
+    << cnt1 << std :: endl
+    << cnt2 << std :: endl;
     return 0;
 }
