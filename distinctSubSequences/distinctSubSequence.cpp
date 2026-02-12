@@ -19,13 +19,13 @@ public:
         dp.assign(m, std :: vector <int>(n, -1));
     }
     int solveDistinctSubSequence(int i = 0, int j = 0){
-        if(i >= s1.size()) return 0;
-        if(j == s2.size()) return 1;
+        if(j == n) return 1;
+        if(i >= m) return 0;
         if(dp[i][j] != -1) return dp[i][j];
 
         if(s1[i] == s2[j]){
-            int p = solveDistinctSubSequence(i + 1, j); 
-            int q = solveDistinctSubSequence(i, j + 1);
+            int p = solveDistinctSubSequence(i + 1, j + 1); 
+            int q = solveDistinctSubSequence(i + 1, j);
             dp[i][j] = p + q;
             return dp[i][j];
         }
@@ -34,11 +34,12 @@ public:
     }
     int countDistinctSubSequence(){
         dp.assign(m + 1, std :: vector <int>(n + 1, 0));
+        dp[m][n] = 1;
         for(int i = m - 1; i >= 0; i--){
             dp[i][n] = 1;
             for(int j = n - 1; j >= 0; j--){
                 if(s1[i] == s2[j]){
-                    dp[i][j] = dp[i + 1][j] + dp[i][j + 1];
+                    dp[i][j] = dp[i + 1][j + 1] + dp[i + 1][j];
                     continue;
                 }
                 dp[i][j] = dp[i + 1][j];
@@ -62,8 +63,8 @@ public:
 };
 
 int main(){
-    std :: string s1 = "bbagbgagbabbbagaabaagbga";
-    std :: string s2 = "bag";
+    std :: string s1 = "rabbbit";
+    std :: string s2 = "rabbit";
     solution problem(s1, s2);
     problem.resetDP();
     int cnt0 = problem.solveDistinctSubSequence();
