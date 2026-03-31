@@ -56,8 +56,8 @@ int solveLongLen(std :: vector <std :: vector <int>>& dp, std :: string s1, std 
 }
 
 int main(){
-    std :: string s1 = "afgidckuncdjgkl";
-    std :: string s2 = "uicctscndakjhl";
+    std :: string s1 = "rrat";
+    std :: string s2 = "rat";
     std :: vector <std :: vector <int>> dp(s1.size(), std :: vector <int>(s2.size(), -1));
     int longLen = longestLength(s1, s2, dp);
     int l_len = longestLen(s1, s2);

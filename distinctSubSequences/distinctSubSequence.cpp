@@ -63,7 +63,7 @@ public:
 };
 
 int main(){
-    std :: string s1 = "rabbbit";
+    std :: string s1 = "rabbbiitt";
     std :: string s2 = "rabbit";
     solution problem(s1, s2);
     problem.resetDP();
@@ -71,7 +71,7 @@ int main(){
     int cnt1 = problem.countDistinctSubSequence();
     problem.resetDP();
     int cnt2 = problem.countDistinctSubSeq();
-    std :: cout <<"distinct sub sequences: \n"
+    std :: cout <<"\ndistinct sub sequences: \n"
     << cnt0 << std :: endl
     << cnt1 << std :: endl
     << cnt2 << std :: endl;

@@ -33,8 +33,6 @@ int count_Partitions(int &num){
             dp[i][j] = count;
         }
     }
-
-    
     return dp[1][num];
 }
 
