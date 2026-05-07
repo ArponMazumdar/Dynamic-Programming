@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector> 
 
-int countMaxProfitforTwoTransaction(std :: vector <std :: vector <int>> &dp, std :: vector <int> &stockPrice, int maxTransaction = 1, int depth = 0){
-    if(maxTransaction > 2 || depth >= stockPrice.size()){
+int countMaxProfitforTwoTransaction(std :: vector <std :: vector <int>> &dp, std :: vector <int> &stockPrice, int maxTransaction = 2, int depth = 0){
+    if(maxTransaction == 0 || depth >= stockPrice.size()){
         return 0;
     }
     if(dp[depth][maxTransaction] != -1){
@@ -13,7 +13,7 @@ int countMaxProfitforTwoTransaction(std :: vector <std :: vector <int>> &dp, std
     for(int i = depth; i < stockPrice.size(); i++){
         for(int j = i + 1; j < stockPrice.size(); j++){
             int currProfit = stockPrice[j] - stockPrice[i];
-            int secondProfit = countMaxProfitforTwoTransaction(dp, stockPrice, maxTransaction + 1, j + 1);
+            int secondProfit = countMaxProfitforTwoTransaction(dp, stockPrice, maxTransaction - 1, j + 1);
             maxProfit = std :: max(maxProfit, currProfit + secondProfit);
         }
     }
