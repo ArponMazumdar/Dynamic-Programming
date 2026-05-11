@@ -24,18 +24,15 @@ int countMaxProfit(std :: vector <std :: vector <int>> &dp, std :: vector <int> 
 int countMaximumProfit(std :: vector <int> &price, int K){
     int n = price.size();
     std :: vector <std :: vector <int>> dp(n + 1, std :: vector <int> (K + 1, 0));
-    for(int i = 1; i <= K; i++){
-        dp[n][i] = -1e9;
-    }
     for(int depth = n - 1; depth >= 0; depth--){
         for(int k = 1; k <= K; k++){
-            int maxProfit = -1e9;
-            for(int i = depth; i < price.size(); i++){
-                for(int j = i + 1; j < price.size(); j++){
+            int maxProfit = 0;
+            for(int i = depth; i < n; i++){
+                for(int j = i + 1; j < n; j++){
                     int currProfit = price[j] - price[i];
                     int nextProfit = dp[j + 1][k - 1];
                     int totalProfit = currProfit + nextProfit;
-                    maxProfit = std :: max(maxProfit, currProfit);
+                    maxProfit = std :: max(maxProfit, totalProfit);
                 }
             }
             dp[depth][k] = maxProfit;
@@ -99,8 +96,22 @@ int calculateMaxProfit(std :: vector <int> &price, int k){
     return dp[k][0];
 }
 
+int calculateMaxProfitNtransaction(std :: vector <std :: vector <int>> &dp, std :: vector <int> &price, int k, int i = 0, int j = 0){
+    if(i == price.size() || j == 2*k) return 0;
+    if(dp[i][j] != -1) return dp[i][j];
+
+    if(j % 2 == 0){
+        int p_1 = calculateMaxProfitNtransaction(dp, price, k, i + 1, j + 1) - price[i];
+        int p_2 = calculateMaxProfitNtransaction(dp, price, k, i + 1, j);
+        return dp[i][j] = std :: max(p_1, p_2);
+    }
+    int p_1 = price[i] + calculateMaxProfitNtransaction(dp, price, k, i + 1, j + 1);
+    int p_2 = calculateMaxProfitNtransaction(dp, price, k, i + 1, j);
+    return dp[i][j] = std :: max(p_1, p_2);
+}
+
 int main(){
-    int k = 8;
+    int k = 2;
     std :: vector <int> price = {1, 7, 4, 7, 8, 11, 9, 20, 1, 4, 13, 2, 7, 9, 0, 13, 21, 34, 1, 7, 3, 1, 0, 9, 4, 44, 7, 21, 12, 24, 8, 9, 0, 5, 10};
     int n = price.size();
     printf("\nmaximum profit for %d transactions\nvalue \t time(milli seconds)\n", k);
@@ -130,6 +141,12 @@ int main(){
     int ans4 = countMaximumProfit(price, k);
     e = std :: chrono :: high_resolution_clock :: now();
     d = e - s;
-    printf("%d \t   %Lf\n", ans3, d.count());
+    printf("%d \t   %Lf\n", ans4, d.count());
+    dp.assign(n, std :: vector <int>(4, -1));
+    s = std :: chrono :: high_resolution_clock :: now();
+    int ans5 = calculateMaxProfitNtransaction(dp, price, k);
+    e = std :: chrono :: high_resolution_clock :: now();
+    d = e - s;
+    printf("%d \t   %Lf\n", ans5, d.count());
     return 0;
 }
