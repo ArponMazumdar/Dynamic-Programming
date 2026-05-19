@@ -139,7 +139,7 @@ int calculateMaximumProfit(std :: vector <int> &price, int K){
 }
 
 int main(){
-    int k = 12;
+    int k = 14;
     std :: vector <int> price = {1, 7, 4, 7, 8, 11, 9, 20, 1, 4, 13, 2, 7, 9, 0, 13, 21, 34, 1, 7, 3, 1, 0, 9, 4, 44, 7, 21, 12, 24, 8, 9, 0, 5, 10};
     int n = price.size();
     printf("\nmaximum profit for %d transactions\nvalue \t time(milli seconds)\n", k);

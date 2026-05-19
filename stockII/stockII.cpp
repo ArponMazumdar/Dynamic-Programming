@@ -76,7 +76,7 @@ int solveMaxProfit(std :: vector <std :: vector<int>> &dp, std :: vector <int> &
 }
 
 int main(){
-    std :: vector <int> val = {1, 51, 9, 3, 7, 11, 2, 4, 23, 1, 5, 4, 9, 17, 6, 10, 7};
+    std :: vector <int> val = {1, 7, 6, 5, 8};
     std :: vector <int> memo(val.size(), -1);
     int ans = solve(memo, val);
     std :: queue <int> q;
