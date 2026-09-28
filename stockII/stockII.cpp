@@ -76,12 +76,13 @@ int solveMaxProfit(std :: vector <std :: vector<int>> &dp, std :: vector <int> &
 }
 
 int main(){
-    std :: vector <int> val = {1, 7, 6, 5, 8};
-    std :: vector <int> memo(val.size(), -1);
+    std :: vector <int> val = {7, 6, 1, 7, 8, 5, 2, 9, 11, 9, 20};//, 1, 4, 13, 2, 7, 9, 0, 13, 21, 34};
+    int n = val.size();
+    std :: vector <int> memo(n, -1);
     int ans = solve(memo, val);
     std :: queue <int> q;
     int ans1 = profit(val, q);
-    std :: vector <std :: vector <int>> dp(val.size(), std :: vector <int> (2, -1));
+    std :: vector <std :: vector <int>> dp(n, std :: vector <int> (2, -1));
     int ans2 = solveMaxProfit(dp, val);
     std :: cout << "\n" << ans << "\n" << ans1 << "\n" << ans2 << "\n";
     return 0;

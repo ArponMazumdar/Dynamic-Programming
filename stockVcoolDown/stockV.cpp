@@ -2,6 +2,8 @@
 #include <vector>
 #include <chrono>
 
+//not allowed to make two consecutive transactions...
+
 int countMaxProfitWithCoolDown(std :: vector <int> &dp, std :: vector <int> &price, int depth = 0){
     if(depth >= price.size()) return 0;
     if(dp[depth] != -1) return dp[depth];
@@ -64,7 +66,7 @@ int countCoolDownMaxProfit(std :: vector <int> &price){
 }
 
 int main(){
-    std :: vector <int> price = {1, 7, 4, 7, 8, 11, 9, 20, 1, 4, 13, 2, 7, 9, 0, 13, 21, 34, 1, 7, 3, 1, 0, 9, 4, 44, 7, 21, 12, 24, 8, 9, 0, 5, 10, 18, 21, 1, 9, 12};
+    std :: vector <int> price = {1, 7, 4, 7, 8, 11, 9, 20, 1, 4, 13, 2, 7, 9, 0, 13, 21, 34, 1, 7, 3 ,1, 0, 9, 4, 44, 7, 21, 12, 24, 8, 9, 0, 5, 10, 18, 21, 1, 9, 12};
     int n = price.size();
     printf("\nMaximum profit with cooldown\nvalue \t time(milli second)\n");
     std :: vector <int> dp(n, -1);

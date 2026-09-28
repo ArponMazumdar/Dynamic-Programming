@@ -88,7 +88,7 @@ int countProfitTwoTransaction(std :: vector <int> &prices){
 }
 
 int main(){
-    std :: vector <int> price = {5, 9, 1, 2, 12, 1, 6, 10, 14, 2, 9, 1, 7, 21, 9, 5, 8, 7, 25};
+    std :: vector <int> price = {5, 9, 1, 2, 12, 1, 6, 10};//, 14, 2, 9, 1, 7, 21, 9, 5, 8, 7, 25};
     int n = price.size();
     printf("\nmaximum profit after 2 transactions\nvalue\ttime(micro sec)\n");
     std :: vector <std :: vector <int>> dp(n, std :: vector <int>(3, -1));

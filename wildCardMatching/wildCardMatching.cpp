@@ -57,8 +57,8 @@ bool solveMatched(std :: string &s1, std :: string &s2){
 }
 
 int main(){
-    std :: string s1 = ".*";
-    std :: string s2 = "abcdefghij";
+    std :: string s1 = "*";
+    std :: string s2 = "xyz";
     int m = s1.size();
     int n = s2.size();
     std :: vector <std :: vector <int>> memo(m, std :: vector <int>(n, -1));
